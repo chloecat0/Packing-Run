@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7rf3kinellau"]
+
+[ext_resource type="Script" uid="uid://dkmh78omiipvr" path="res://player.gd" id="1_xhfnw"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_xhfnw")
+
+[node name="Marker2D" type="Marker2D" parent="."]
