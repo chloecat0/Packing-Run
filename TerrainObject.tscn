@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://eyse6x0iqg1s"]
+
+[ext_resource type="Texture2D" uid="uid://u62agu7ehh8d" path="res://cardboard.png" id="1_uwwbv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yldn7"]
+size = Vector2(150, 350)
+
+[node name="TerrainObject" type="StaticBody2D" unique_id=2070662903]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=331910554]
+position = Vector2(75, 175)
+shape = SubResource("RectangleShape2D_yldn7")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1820206423]
+offset = Vector2(75, 175)
+antialiased = true
+texture = ExtResource("1_uwwbv")
+texture_offset = Vector2(122, 42)
+texture_scale = Vector2(5, 5)
+polygon = PackedVector2Array(-75, -175, 75, -175, 75, 175, -75, 175)

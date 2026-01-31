@@ -1,22 +1,24 @@
 extends CharacterBody2D
 
-var speed: float = 2000
-var gravity: float = 980
-var jump_impulse: float = 200
+@export var speed: float = 2000
+@export var gravity: float = 980
+@export var jump_impulse: float = 200
 
-var radius: float = 15
-var centre_radius: float = 10
-var empty_radius: float = 7
+@export var radius: float = 15
+@export var centre_radius: float = 10
+@export var empty_radius: float = 7
 
-var radius_reduction: float = 1
+@export var radius_reduction: float = 1
 var out_of_tape: bool = false
+
+var time_on_wall: float = 0
+@export var max_time_on_wall: float = 1
 
 @onready var collision_circle := $CollisionShape2D
 var collision_shape: CircleShape2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#line_points.append(global_position)
 	collision_shape = CircleShape2D.new()
 	collision_shape.radius = radius
 	collision_circle.shape = collision_shape
@@ -26,10 +28,21 @@ func _physics_process(delta: float) -> void:
 		velocity.x = speed*delta
 	else:
 		velocity.x = 0
+	
 	if not is_on_floor():
 		velocity.y += gravity*delta
-	elif Input.is_action_just_pressed("jump") && not out_of_tape:
+	elif Input.is_action_just_pressed("jump") && not out_of_tape && not is_on_wall():
 		velocity.y = -jump_impulse
+	
+	if not out_of_tape && is_on_wall() && time_on_wall < max_time_on_wall:
+		velocity.y = -speed*delta
+		time_on_wall += delta
+	else:
+		#at top of a wall
+		if time_on_wall > 0 and time_on_wall < max_time_on_wall:
+			#velocity.y = -jump_impulse
+			position += Vector2(1, 0) #move a bit to be on top of wall
+		time_on_wall = 0
 	move_and_slide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
