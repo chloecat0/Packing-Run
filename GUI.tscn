@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cudc0ynhr600v"]
+
+[ext_resource type="Script" uid="uid://bdbpmqy8uq1ov" path="res://gui.gd" id="1_0v7bq"]
+[ext_resource type="Texture2D" uid="uid://4tsfisen0db5" path="res://label_bg.png" id="1_q7530"]
+
+[node name="GUI" type="MarginContainer" unique_id=189698061]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource("1_0v7bq")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=949857810]
+layout_mode = 2
+
+[node name="Points" type="MarginContainer" parent="HBoxContainer" unique_id=1948520333]
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="HBoxContainer/Points" unique_id=1293501857]
+custom_minimum_size = Vector2(130, 40)
+layout_mode = 2
+texture = ExtResource("1_q7530")
+
+[node name="Title" type="Label" parent="HBoxContainer/Points/Background" unique_id=1910610052]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 84.0
+offset_bottom = 37.0
+theme_override_font_sizes/font_size = 24
+text = "Points:"
+vertical_alignment = 1
+
+[node name="Number" type="Label" parent="HBoxContainer/Points/Background" unique_id=854216855]
+layout_mode = 0
+offset_top = 3.0
+offset_right = 125.0
+offset_bottom = 37.0
+theme_override_font_sizes/font_size = 24
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1

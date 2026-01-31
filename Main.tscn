@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://22nj5eiw2abe"]
 
 [ext_resource type="PackedScene" uid="uid://b7rf3kinellau" path="res://Player.tscn" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://cudc0ynhr600v" path="res://GUI.tscn" id="3_cm0pq"]
 [ext_resource type="Script" uid="uid://dl6tngjnwyp1q" path="res://terrain_generator.gd" id="3_r0du0"]
 
 [node name="Main" type="Node2D" unique_id=817699504]
@@ -15,7 +16,15 @@ z_index = -1
 script = ExtResource("3_r0du0")
 
 [node name="Timer" type="Timer" parent="TerrainGenerator" unique_id=1189777456]
-wait_time = 4.0
+wait_time = 2.0
 autostart = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1919166736]
+
+[node name="GUI" parent="CanvasLayer" unique_id=189698061 instance=ExtResource("3_cm0pq")]
+offset_bottom = 80.0
+
+[connection signal="score_updated" from="Player/Body" to="CanvasLayer/GUI" method="_on_body_score_updated"]
 [connection signal="timeout" from="TerrainGenerator/Timer" to="TerrainGenerator" method="spawn_terrain"]
+
+[editable path="Player"]
