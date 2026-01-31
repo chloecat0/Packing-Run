@@ -17,6 +17,8 @@ var time_on_wall: float = 0
 @onready var collision_circle := $CollisionShape2D
 var collision_shape: CircleShape2D
 
+@onready var end_timer := $EndGameTimer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	collision_shape = CircleShape2D.new()
@@ -44,6 +46,8 @@ func _physics_process(delta: float) -> void:
 			position += Vector2(1, 0) #move a bit to be on top of wall
 		time_on_wall = 0
 	move_and_slide()
+	if position.y > 720:
+		start_end_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -53,5 +57,14 @@ func update_radius(reduction: float = 0):
 	radius -= reduction
 	if radius < centre_radius:
 		radius = centre_radius
+		if not out_of_tape:
+			start_end_timer()
 		out_of_tape = true
 	collision_shape.radius = radius
+
+func start_end_timer():
+	if end_timer.is_stopped():
+		end_timer.start()
+
+func end_run():
+	print("Game Over")

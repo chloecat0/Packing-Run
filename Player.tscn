@@ -8,8 +8,10 @@ radius = 15.0
 
 [node name="Player" type="Node2D" unique_id=116268679]
 script = ExtResource("1_kpjcp")
+background_color = Color(0.38431373, 0.4627451, 0.49019608, 1)
 
-[node name="Movement" type="CharacterBody2D" parent="." unique_id=1246991844]
+[node name="Body" type="CharacterBody2D" parent="." unique_id=1246991844]
+position = Vector2(68, 324)
 collision_layer = 2
 floor_stop_on_slope = false
 floor_constant_speed = true
@@ -17,15 +19,17 @@ floor_block_on_wall = false
 script = ExtResource("1_xhfnw")
 radius = 25.0
 
-[node name="Marker2D" type="Marker2D" parent="Movement" unique_id=2049484014]
+[node name="Marker2D" type="Marker2D" parent="Body" unique_id=2049484014]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Movement" unique_id=204649717]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body" unique_id=204649717]
 shape = SubResource("CircleShape2D_kpjcp")
 
-[node name="Polygon2D" type="Polygon2D" parent="Movement" unique_id=787805161]
-visible = false
-polygon = PackedVector2Array(0, -15, 11, -10, 15, 0, 10, 11, 0, 15, -10, 11, -15, 0, -11, -10)
-
-[node name="Camera2D" type="Camera2D" parent="Movement" unique_id=904214157]
+[node name="Camera2D" type="Camera2D" parent="Body" unique_id=904214157]
 offset = Vector2(150, 0)
+limit_bottom = 700
 drag_vertical_enabled = true
+
+[node name="EndGameTimer" type="Timer" parent="Body" unique_id=775749507]
+one_shot = true
+
+[connection signal="timeout" from="Body/EndGameTimer" to="Body" method="end_run"]

@@ -9,13 +9,13 @@ size = Vector2(150, 350)
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=331910554]
-position = Vector2(75, 175)
+position = Vector2(0, 175)
 shape = SubResource("RectangleShape2D_yldn7")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=1820206423]
-offset = Vector2(75, 175)
+offset = Vector2(0, 175)
 antialiased = true
 texture = ExtResource("1_uwwbv")
-texture_offset = Vector2(122, 42)
-texture_scale = Vector2(5, 5)
+texture_offset = Vector2(185, 40)
+texture_scale = Vector2(5.2, 5.2)
 polygon = PackedVector2Array(-75, -175, 75, -175, 75, 175, -75, 175)

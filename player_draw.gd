@@ -8,7 +8,9 @@ extends Node2D
 @export var centre_color: Color = Color.BISQUE
 @export var background_color: Color = Color.DIM_GRAY
 
-@onready var body := $Movement
+@onready var body := $Body
+
+
 
 var line_start: Vector2
 

@@ -1,19 +1,9 @@
 [gd_scene format=3 uid="uid://22nj5eiw2abe"]
 
 [ext_resource type="PackedScene" uid="uid://b7rf3kinellau" path="res://Player.tscn" id="1_glv2v"]
-[ext_resource type="PackedScene" uid="uid://eyse6x0iqg1s" path="res://TerrainObject.tscn" id="2_uu6xs"]
 [ext_resource type="Script" uid="uid://dl6tngjnwyp1q" path="res://terrain_generator.gd" id="3_r0du0"]
 
 [node name="Main" type="Node2D" unique_id=817699504]
-
-[node name="TerrainObject" parent="." unique_id=2070662903 instance=ExtResource("2_uu6xs")]
-position = Vector2(22, 569)
-
-[node name="TerrainObject2" parent="." unique_id=327537899 instance=ExtResource("2_uu6xs")]
-position = Vector2(210, 549)
-
-[node name="TerrainObject3" parent="." unique_id=1005257030 instance=ExtResource("2_uu6xs")]
-position = Vector2(412, 590)
 
 [node name="Player" parent="." unique_id=100775726 instance=ExtResource("1_glv2v")]
 z_index = 100
@@ -21,10 +11,11 @@ centre_color = Color(0.838378, 0.547057, 0, 1)
 background_color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [node name="TerrainGenerator" type="Node2D" parent="." unique_id=1613421387]
+z_index = -1
 script = ExtResource("3_r0du0")
 
 [node name="Timer" type="Timer" parent="TerrainGenerator" unique_id=1189777456]
-wait_time = 5.0
+wait_time = 4.0
 autostart = true
 
 [connection signal="timeout" from="TerrainGenerator/Timer" to="TerrainGenerator" method="spawn_terrain"]
