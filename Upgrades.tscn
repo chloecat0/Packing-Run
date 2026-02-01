@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cda4g3xlwg2jc"]
+
+[ext_resource type="Script" uid="uid://cy7xtmror4ckw" path="res://upgrades.gd" id="1_fkamj"]
+
+[node name="Upgrades" type="MarginContainer" unique_id=1472143839]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+script = ExtResource("1_fkamj")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=899248393]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=792110906]
+layout_mode = 2
+alignment = 1
+
+[node name="Radius" type="Button" parent="CenterContainer/VBoxContainer" unique_id=724016416]
+layout_mode = 2
+tooltip_text = "Increases the amount of tape"
+focus_neighbor_bottom = NodePath("../RollSpeed")
+focus_next = NodePath("../RollSpeed")
+text = "Radius %f
+%f points"
+
+[node name="RollSpeed" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1005239154]
+layout_mode = 2
+tooltip_text = "Increases speed the tape rolls"
+focus_neighbor_top = NodePath("../Radius")
+focus_neighbor_bottom = NodePath("../Stickiness")
+focus_next = NodePath("../Stickiness")
+focus_previous = NodePath("../Radius")
+text = "Roll Speed %f
+%f points"
+
+[node name="Stickiness" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1681369563]
+layout_mode = 2
+tooltip_text = "Increases the amount of time tape sticks to walls"
+focus_neighbor_top = NodePath("../RollSpeed")
+focus_neighbor_bottom = NodePath("../Bounciness")
+focus_next = NodePath("../Bounciness")
+focus_previous = NodePath("../RollSpeed")
+text = "Stickiness %f
+%f points"
+
+[node name="Bounciness" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1603742707]
+layout_mode = 2
+tooltip_text = "Increases jump height"
+focus_neighbor_top = NodePath("../Stickiness")
+focus_neighbor_bottom = NodePath("../Start")
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../Stickiness")
+text = "Bounciness %f
+%f points"
+
+[node name="Start" type="Button" parent="CenterContainer/VBoxContainer" unique_id=184610832]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Bounciness")
+focus_previous = NodePath("../Bounciness")
+text = "Start Run"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Radius" to="." method="radius_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/RollSpeed" to="." method="roll_speed_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Stickiness" to="." method="stickiness_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Bounciness" to="." method="bounciness_pressed"]

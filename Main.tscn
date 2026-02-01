@@ -1,30 +1,51 @@
 [gd_scene format=3 uid="uid://22nj5eiw2abe"]
 
+[ext_resource type="Script" uid="uid://cps1w30uhtjgq" path="res://main.gd" id="1_fos0i"]
 [ext_resource type="PackedScene" uid="uid://b7rf3kinellau" path="res://Player.tscn" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://cudc0ynhr600v" path="res://GUI.tscn" id="3_cm0pq"]
 [ext_resource type="Script" uid="uid://dl6tngjnwyp1q" path="res://terrain_generator.gd" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://cda4g3xlwg2jc" path="res://Upgrades.tscn" id="4_cm0pq"]
+[ext_resource type="AudioStream" uid="uid://dfush3vvnuda5" path="res://Devonshire Waltz Allegretto.mp3" id="6_3dxm6"]
+[ext_resource type="PackedScene" uid="uid://bc5hkk3r8paqt" path="res://MainMenu.tscn" id="6_trn2v"]
 
 [node name="Main" type="Node2D" unique_id=817699504]
+script = ExtResource("1_fos0i")
 
 [node name="Player" parent="." unique_id=100775726 instance=ExtResource("1_glv2v")]
 z_index = 100
-centre_color = Color(0.838378, 0.547057, 0, 1)
-background_color = Color(0.301961, 0.301961, 0.301961, 1)
 
 [node name="TerrainGenerator" type="Node2D" parent="." unique_id=1613421387]
 z_index = -1
 script = ExtResource("3_r0du0")
 
 [node name="Timer" type="Timer" parent="TerrainGenerator" unique_id=1189777456]
-wait_time = 2.0
+wait_time = 0.2
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1919166736]
 
 [node name="GUI" parent="CanvasLayer" unique_id=189698061 instance=ExtResource("3_cm0pq")]
+visible = false
 offset_bottom = 80.0
 
-[connection signal="score_updated" from="Player/Body" to="CanvasLayer/GUI" method="_on_body_score_updated"]
+[node name="Upgrades" parent="CanvasLayer" unique_id=1472143839 instance=ExtResource("4_cm0pq")]
+visible = false
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=1749067655 instance=ExtResource("6_trn2v")]
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1453480982]
+stream = ExtResource("6_3dxm6")
+volume_db = -3.0
+autoplay = true
+parameters/looping = true
+
+[connection signal="score_updated" from="Player/PlayerBody" to="CanvasLayer/GUI" method="_on_body_score_updated"]
+[connection signal="score_updated" from="Player/PlayerBody" to="CanvasLayer/Upgrades" method="_on_player_body_score_updated"]
 [connection signal="timeout" from="TerrainGenerator/Timer" to="TerrainGenerator" method="spawn_terrain"]
+[connection signal="pressed" from="CanvasLayer/Upgrades/CenterContainer/VBoxContainer/Start" to="." method="start"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/HBoxContainer/VBoxContainer/MenuOptions/Start" to="." method="start"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/HBoxContainer/VBoxContainer/MenuOptions/Upgrades" to="." method="end"]
 
 [editable path="Player"]
+[editable path="CanvasLayer/Upgrades"]
+[editable path="CanvasLayer/MainMenu"]

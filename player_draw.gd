@@ -8,7 +8,7 @@ extends Node2D
 @export var centre_color: Color = Color.BISQUE
 @export var background_color: Color = Color.DIM_GRAY
 
-@onready var body := $Body
+@onready var body := %PlayerBody
 
 
 
@@ -21,6 +21,12 @@ var prev_body_on_wall: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
+
+func reset():
+	tape_lines.clear()
+	prev_body_on_floor = false
+	prev_body_on_wall = false
+	queue_redraw()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
