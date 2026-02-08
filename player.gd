@@ -59,16 +59,18 @@ func _physics_process(delta: float) -> void:
 		velocity.y = -speed*delta
 		time_on_wall += delta
 	else:
-		#at top of a wall
-		if time_on_wall > 0 and time_on_wall < max_time_on_wall:
-			#velocity.y = -jump_impulse
-			position += Vector2(1, 0) #move a bit to be on top of wall
-			time_on_wall = 0
+		if time_on_wall > 0:
+			if time_on_wall < max_time_on_wall: #at top of a wall
+				velocity.y = -min(jump_impulse, speed*delta)
+				position += Vector2(1, 0) #move a bit to be on top of wall
+				time_on_wall = 0
+			else:
+				start_end_timer()
 	move_and_slide()
 	if position.x - last_x > 0.1:
 		update_score(score+(position.x-last_x)/100)
 		last_x = position.x
-	if position.y > 750 && not (is_on_wall() && radius > centre_radius):
+	if position.y > 1000 && velocity.y > 0 && not (is_on_wall() && radius > centre_radius):
 		start_end_timer()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

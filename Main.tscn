@@ -8,6 +8,13 @@
 [ext_resource type="AudioStream" uid="uid://dfush3vvnuda5" path="res://Devonshire Waltz Allegretto.mp3" id="6_3dxm6"]
 [ext_resource type="PackedScene" uid="uid://bc5hkk3r8paqt" path="res://MainMenu.tscn" id="6_trn2v"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lgr22"]
+friction = 0.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_trn2v"]
+normal = Vector2(0, 1)
+distance = -750.0
+
 [node name="Main" type="Node2D" unique_id=817699504]
 script = ExtResource("1_fos0i")
 
@@ -19,7 +26,7 @@ z_index = -1
 script = ExtResource("3_r0du0")
 
 [node name="Timer" type="Timer" parent="TerrainGenerator" unique_id=1189777456]
-wait_time = 0.2
+wait_time = 0.1
 autostart = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1919166736]
@@ -38,6 +45,13 @@ stream = ExtResource("6_3dxm6")
 volume_db = -3.0
 autoplay = true
 parameters/looping = true
+
+[node name="WorldBoundaryTop" type="StaticBody2D" parent="." unique_id=214442232]
+collision_mask = 6
+physics_material_override = SubResource("PhysicsMaterial_lgr22")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBoundaryTop" unique_id=1744730931]
+shape = SubResource("WorldBoundaryShape2D_trn2v")
 
 [connection signal="score_updated" from="Player/PlayerBody" to="CanvasLayer/GUI" method="_on_body_score_updated"]
 [connection signal="score_updated" from="Player/PlayerBody" to="CanvasLayer/Upgrades" method="_on_player_body_score_updated"]

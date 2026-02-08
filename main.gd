@@ -11,6 +11,7 @@ extends Node2D
 func _ready() -> void:
 	upgrade_ui.player = player
 	upgrade_ui.update_buttons()
+	terrain_generator.player = player
 	player.connect("game_ended", end)
 	music.play()
 

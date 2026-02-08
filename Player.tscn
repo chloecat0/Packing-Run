@@ -7,14 +7,19 @@
 radius = 15.0
 
 [node name="Player" type="Node2D" unique_id=116268679]
+process_priority = -1
+process_physics_priority = -1
 script = ExtResource("1_kpjcp")
 centre_color = Color(0.8392157, 0.54509807, 0, 1)
 background_color = Color(0.341883, 0.41526768, 0.44092706, 1)
 
 [node name="PlayerBody" type="CharacterBody2D" parent="." unique_id=1246991844]
 unique_name_in_owner = true
+process_priority = -2
+process_physics_priority = -2
 position = Vector2(68, 324)
 collision_layer = 2
+slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_constant_speed = true
 floor_block_on_wall = false
